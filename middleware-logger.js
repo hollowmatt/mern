@@ -3,7 +3,7 @@ const logger = (options) => (request, response, next) => {
 			&& options != null 
 			&& options.enable) {
 		console.log(
-			'Status Code: ', response.statusCode, 'URL:', request.originalURL,);
+			'Status Code: ', response.statusCode, 'URL:', request.originalUrl,);
 	}
 	next();
 }
