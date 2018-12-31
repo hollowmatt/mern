@@ -14,10 +14,10 @@ app.use(bodyParser.json({
 
 // Do not allow unless whitelisted, only allow specified JS
 app.use(helmet.contentSecurityPolicy({
-	direcxtives: {
+	directives: {
 		defaultSrc:[`'none'`],
-		scriptSrc:[`'nonce-${suid'`],
-		reportUrl: '/csp-violation',
+		scriptSrc:[`'nonce-${suid}'`],
+		reportUri: '/csp-violation',
 	}
 }));
 
@@ -46,3 +46,44 @@ app.use(helmet.hidePoweredBy( {
 	setTo: 'Django/1.2.1 SVN-13336',
 }))
 
+//disable untrusted IE executions
+app.use(helmet.ieNoOpen());
+
+// use noSniff to disable mime type guessing
+app.use(helmet.noSniff());
+
+//make header avail only for current domain
+app.use(helmet.referrerPolicy({
+	policy: 'same-origin'
+}));
+
+//prevent XSS attacks
+app.use(helmet.xssFilter());
+
+app.get('/', (request, response, next) => {
+	response.send(`
+		<!DOCTYPE html>
+		<html>
+			<head>
+				<meta charset='utf-8'>
+				<title>Dark Helmet</title>
+			</head>
+			<body>
+				<span id='txtlog'></span>
+				<img alt="evil picture" src="http://evil.com/pic.jpg">
+				<script>
+					alert('This does not get executed');
+				</script>
+				<script src="http://evil.com/evilstuff.js"></script>
+				<script nonce="${suid}">
+					document.getElementById('txtlog').innerText = 'Hello Dark Helmet'
+				</script>
+			</body>
+		</html>
+	`)
+});
+
+app.listen(
+	1337,
+	() => console.log('Web server running on port 1337'),
+);
