@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/hollowmatt/mern#readme",
   "dependencies": {
+    "debug": "3.1.0",
     "body-parser": "1.18.2",
     "chalk": "2.4.1",
     "compression": "1.7.2",
