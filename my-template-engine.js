@@ -16,8 +16,8 @@ app.engine('tpl', (filepath, options, callback) => {
 			}
 			return match;
 		});
-	})
-	return callback(null, content);
+		return callback(null, content);
+	});
 });
 
 app.set('views', './views');
