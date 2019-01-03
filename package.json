@@ -17,8 +17,6 @@
   },
   "homepage": "https://github.com/hollowmatt/mern#readme",
   "dependencies": {
-    "express": "4.16.3",
-    "node-fetch": "2.1.1",
-    "uuid": "3.2.1"
+    "mongoose": "5.0.11"
   }
 }
