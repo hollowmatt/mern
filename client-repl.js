@@ -36,36 +36,36 @@ const login = (username, password) => query('/login', {
 	body: { username, password },
 });
 
-const logout = () => query('/logout' => {
+const logout = () => query('/logout', {
 	method: 'POST',
 });
 
-const getProfile = () => query('/profile' => {
+const getProfile = () => query('/profile', {
 	method: 'GET',
 });
 
-const changePassword = (password) => query('/changepass' => {
+const changePassword = (password) => query('/changepass', {
 	method: 'PUT',
 	body: { password },
 });
 
-const deleteProfile = () => query('/delete' => {
+const deleteProfile = () => query('/delete', {
 	method: 'DELETE',
 });
 
 const replServer = repl.start({
 	prompt: '>',
 	ignnoreUndefined: true,
-	asyn eval(cmd, context, filename, callback) {
+	async eval(cmd, context, filename, callback) {
 		const script = new vm.Script(cmd);
 		const is_raw = process.stdin.isRaw;
 		process.stdin.setRawMode(false);
 		try {
 			const res = await Promise.resolve(
-				script.runInContext(contex, {
+				script.runInContext(context, {
 					displayErrors: false,
 					breakOnSigint: true,
-				});
+				})
 			);
 			callback(null, res);
 		} catch(error) {
@@ -80,7 +80,7 @@ const replServer = repl.start({
 			colors: true,
 			compact: false,
 		});
-	};
+	}
 });
 
 replServer.context.api = {

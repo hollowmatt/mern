@@ -17,7 +17,8 @@ app.use((request, response, next) => {
 			typeof connection !== 'undefined'
 			? next()
 			: next(new Error('MongoError'))
-	;)
+		)
+	);
 });
 
 app.use(session({

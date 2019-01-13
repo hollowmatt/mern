@@ -17,7 +17,7 @@ const UserSchema = new Schema({
 	password: String,
 });
 
-serSchema.static('login', async function(usr, pwd) {
+UserSchema.static('login', async function(usr, pwd) {
 	const hash = crypto.createHash('sha256').update(String(pwd));
 	const user = await this.findOne()
 		.where('username').equals(usr)
@@ -32,12 +32,12 @@ UserSchema.static('signup', async function(usr, pwd) {
 		throw new Error('Password must be greater than 6 chars');
 	}
 	const hash = crypto.createHash('sha256').update(String(pwd));
-	const user = await this.findOne()
+	const exist = await this.findOne()
 		.where('username').equals(usr);
 	if(exist) throw new Error('Username already exists');
 	const user = this.create({
 		username: usr,
-		password: hash.digext('hex'),
+		password: hash.digest('hex'),
 	})
 	return user;
 });
