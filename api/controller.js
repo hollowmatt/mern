@@ -33,7 +33,7 @@ api.post('/login', isNotLogged, async (req, res) => {
 	}
 });
 
-api.post('/logoug', isLogged, (req, res) => {
+api.post('/logout', isLogged, (req, res) => {
 	req.session.destroy();
 	res.status(200).send({status: 'Goodbye'});
 });
