@@ -2,13 +2,14 @@ const express = require('express');
 const User = require('./model');
 const api = express.Router();
 
+//Request handler to check if user is logged in
 const isLogged = ({ session }, res, next) => {
 	if (!session.user) res.status(403).json({
 		status: 'You are not logged in',
 	}) 
 	else next()
 };
-
+//Request handler to check if not logged in
 const isNotLogged = ({ session }, res, next) => {
 	if (session.user) res.status(403).json({
 		status: 'You are already logged in',
@@ -16,6 +17,7 @@ const isNotLogged = ({ session }, res, next) => {
 	else next();
 };
 
+//POST method to login
 api.post('/login', isNotLogged, async (req, res) => {
 	try {
 		const {session, body} = req;
@@ -33,11 +35,13 @@ api.post('/login', isNotLogged, async (req, res) => {
 	}
 });
 
+//POST method to logout
 api.post('/logout', isLogged, (req, res) => {
 	req.session.destroy();
 	res.status(200).send({status: 'Goodbye'});
 });
 
+//POST method to allow signup
 api.post('/signup', async(req,res) => {
 	try {
 		const { session, body } = req;
@@ -49,11 +53,13 @@ api.post('/signup', async(req,res) => {
 	}
 });
 
+//GET method to get profile data (must be logged in)
 api.get('/profile', isLogged, (req, res) => {
 	const { user } = req.session;
 	res.status(200).json({ user });
 });
 
+//PUT method to change password (must be logged in)
 api.put('/changepass', isLogged, async(req, res) => {
 	try {
 		const { session, body } = req;
@@ -71,6 +77,7 @@ api.put('/changepass', isLogged, async(req, res) => {
 	}
 });
 
+//DELETE method to delete a user
 api.delete('/delete', isLogged, async(req, res) => {
 	try {
 		const { _id } = req.session.user;
@@ -85,4 +92,5 @@ api.delete('/delete', isLogged, async(req, res) => {
 	}
 });
 
+//export the API routes
 module.exports = api;

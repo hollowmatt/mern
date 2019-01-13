@@ -1,6 +1,8 @@
 const { connection, Schema } = require('mongoose');
 const crypto = require('crypto');
+//crypto used to create password hashes
 
+//schema for mongo storage
 const UserSchema = new Schema({
 	username: {
 		type: String,
@@ -17,6 +19,11 @@ const UserSchema = new Schema({
 	password: String,
 });
 
+//****
+//* Model method definitions below:
+//****
+
+//static model method for login
 UserSchema.static('login', async function(usr, pwd) {
 	const hash = crypto.createHash('sha256').update(String(pwd));
 	const user = await this.findOne()
@@ -27,6 +34,7 @@ UserSchema.static('login', async function(usr, pwd) {
 	return user;
 });
 
+//static model method for signup
 UserSchema.static('signup', async function(usr, pwd) {
 	if (pwd.length < 6) {
 		throw new Error('Password must be greater than 6 chars');
@@ -42,6 +50,7 @@ UserSchema.static('signup', async function(usr, pwd) {
 	return user;
 });
 
+//instance model method for changing password
 UserSchema.method('changePass', async function(pwd) {
 	if (pwd.length < 6) {
 		throw new Error('Password must be greater than 6 chars');
@@ -51,4 +60,5 @@ UserSchema.method('changePass', async function(pwd) {
 	return this.save();
 });
 
+//compile and export the model
 module.exports = connection.model('User', UserSchema);

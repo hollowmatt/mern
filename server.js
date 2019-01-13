@@ -5,12 +5,15 @@ const bodyParser = require('body-parser');
 const MongoStore = require('connect-mongo')(session);
 const api = require('./api/controller');
 const app = express();
+
 const db = mongoose.connect(
 	'mongodb://localhost:27017/test'
 ).then(conn => conn).catch(console.error);
 
 app.use(bodyParser.json());
 
+//ensures an open Mongo connection before allowing 
+//routes to be executed.
 app.use((request, response, next) => {
 	Promise.resolve(db).then(
 		(connection, err) => (
@@ -21,6 +24,7 @@ app.use((request, response, next) => {
 	);
 });
 
+//store sessions in Mongo instead of in memory
 app.use(session({
 	secret: 'MERN QSG',
 	resave: false,
