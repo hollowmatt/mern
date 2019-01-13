@@ -7,16 +7,18 @@ const { Headers } = fetch;
 let cookie = null;
 
 const query = (path, ops) => {
+	console.log(ops.body);
+	const reqHeaders = new Headers({
+		...(ops.headers || {}),
+		cookie,
+		'Accept': 'application/json',
+		'Content-Type': 'application/json',
+	});
 	return fetch(`http://localhost:1337/users/${path}`, {
 		method: ops.body,
 		credentials: 'include',
 		body: JSON.stringify(ops.body),
-		headers: new Headers({
-			...(ops.headers || {}),
-			cookie,
-			Accept: 'application/json',
-			'Content-Type': 'application/json',
-		}),
+		headers: reqHeaders,
 	}).then(async (r) => {
 		cookie = r.headers.get('set-cookie') || cookie;
 		return {
