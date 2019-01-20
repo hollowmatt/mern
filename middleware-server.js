@@ -10,14 +10,17 @@ const app = http.createServer((req, res) => {
 			(err, data) => {
 				if(err) {
 					res.writeHead(500);
+					console.log("500 error: " + err);
 					return void res.end();
 				}
 				res.writeHead(200);
+				console.log("all good: 200 status");
 				res.end(data);
 			}
 		);
 	} else {
 		res.writeHead(403);
+		console.log("Forbidden - not / url");
 		res.end();
 	}
 });
@@ -55,6 +58,7 @@ namespace.login.on('connection', socket => {
 		const user = data;
 		if(evtName === 'tryLogin' && user.username === 'nipper') {
 			socket.emit('loginError', { message: 'Banned User' });
+			console.log("Login Error - banned user");
 		} else {
 			next();
 		}
@@ -68,8 +72,10 @@ namespace.login.on('connection', socket => {
 				usernam
 			};
 			socket.emit('loginSuccess');
+			console.log(`succesful login of ${username}`);
 		} else {
 			socket.emit('loginError', { message: 'Invalid Credentials '});
+			console.log("invalid Credentials");
 		}
 	});
 });
