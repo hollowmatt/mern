@@ -18,7 +18,7 @@
 		
 		<script type="text/babel">
 			const title = document.getElementById('title');
-			const error = document.getElementsByName('logErrors')[0];
+			const error = document.getElementsByName('logs')[0];
 			const loginForm = document.getElementById('loginForm');
 
 			const manager = new io.Manager(
@@ -41,11 +41,12 @@
 			});
 
 			namespace.login.on('loginError', (err) => {
-				logs.textContent = err.message;
+				error.textContent = err.message;
 			});
 
-			form.addEventListener('submit', (event) => {
+			loginForm.addEventListener('submit', (event) => {
 				const body = new FormData(loginForm);
+				console.log("Username: " + body.get('username') + ", password: " + body.get('password'));
 				namespace.login.emit('tryLogin', {
 					username: body.get('username'),
 					password: body.get('password')

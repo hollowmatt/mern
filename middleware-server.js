@@ -34,11 +34,12 @@ const users = [
 ];
 
 const userMatch = (username, password) => ( 
-	users.find(user => {
-		user.username === username &&
-		user.password === password
-	})
+	users.find(user => ( 
+    user.username === username && 
+    user.password === password 
+  )) 
 );
+
 
 const isUserLoggedIn = (socket, next) => {
 	const { session } = socket.request;
@@ -54,7 +55,7 @@ const namespace = {
 
 namespace.login.on('connection', socket => {
 	socket.use((packet, next) => {
-		cost [evtName, data] = packet;
+		const [evtName, data] = packet;
 		const user = data;
 		if(evtName === 'tryLogin' && user.username === 'nipper') {
 			socket.emit('loginError', { message: 'Banned User' });
@@ -63,13 +64,14 @@ namespace.login.on('connection', socket => {
 			next();
 		}
 	});
-	socket.on('tryLogin', UserData => {
+	socket.on('tryLogin', userData => {
 		const { username, password } = userData;
+		console.log(`Values passed in: ${username} | ${password}`);
 		const request = socket.request;
 		if(userMatch(username, password)) {
 			request.session = {
 				isLogged: true,
-				usernam
+				username
 			};
 			socket.emit('loginSuccess');
 			console.log(`succesful login of ${username}`);
