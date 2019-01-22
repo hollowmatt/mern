@@ -46,13 +46,13 @@
 			loginForm.addEventListener('submit', (event) => {
 				const body = new FormData(loginForm);
 				console.log("Username: " + body.get('username') + ", password: " + body.get('password'));
-				namespace.login.emit('tryLogin', {
+				namespace.login.emit('enter', {
 					username: body.get('username'),
 					password: body.get('password')
 				});
 				event.preventDefault();
 			});
-			
+
 		</script>
 		
 	</body>
