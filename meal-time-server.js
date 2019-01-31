@@ -3,7 +3,7 @@ const path = require('path');
 const app = express();
 
 app.use('/lib', express.static(
-	path.join(__dirname, 'node_modules', 'redux', 'dist');
+	path.join(__dirname, 'node_modules', 'redux', 'dist')
 ));
 
 app.get('/', (req, res) => {
