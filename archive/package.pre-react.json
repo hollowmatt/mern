@@ -1,0 +1,29 @@
+{
+  "name": "mern",
+  "version": "1.0.0",
+  "description": "mern quickstart chapter 3",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hollowmatt/mern.git"
+  },
+  "author": "Matt Holloway",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hollowmatt/mern/issues"
+  },
+  "homepage": "https://github.com/hollowmatt/mern#readme",
+  "dependencies": {
+    "body-parser": "1.18.2",
+    "connect-mongo": "2.0.1",
+    "express": "4.16.3",
+    "express-session": "1.15.6",
+    "mongoose": "5.0.11",
+    "socket.io": "2.1.0",
+    "node-fetch": "2.1.2",
+    "redux": "4.0.0"
+  }
+}
