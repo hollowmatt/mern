@@ -8,15 +8,17 @@
 	</head>
 	<body>
 		<h1>List:</h1>
-		<form id="item-form">
-			<input id="item-input" name="item" />
+		<p id="current-time"></p>
+		<form id="todo-form">
+			<input id="todo-input" name="item" />
 			<input type="submit" id="submit" value="submit"/>
 		</form>
+		<p id="lucky-number"></p>
 		<ul id="list"></ul>
 		<script type="text/babel">	
 			const timeElem = document.querySelector('#current-time'); 
       const formElem = document.querySelector('#todo-form'); 
-      const listElem = document.querySelector('#todo-list'); 
+      const listElem = document.querySelector('#list'); 
       const inputElem = document.querySelector('#todo-input'); 
       const luckyElem = document.querySelector('#lucky-number');
 
