@@ -10,6 +10,7 @@
 		<h1>List:</h1>
 		<form id="item-form">
 			<input id="item-input" name="item" />
+			<input type="submit" id="submit" value="submit"/>
 		</form>
 		<ul id="list"></ul>
 		<script type="text/babel">	
@@ -26,11 +27,11 @@
 	    } = Redux;
 
 	    const TYPE = {
-	    	SET_TIME: 'SET_TIME';
-	    	SET_LUCKY_NUMBER: 'SET_LUCKY_NUMBER';
-	    	ADD_TODO: 'ADD_TODO';
-	    	REMOVE_TODO: 'REMOVE_TODO';
-	    	TOGGLE_COMPLETED_TODO: 'TOGGLE_COMPLETED_TODO';
+	    	SET_TIME: 'SET_TIME',
+	    	SET_LUCKY_NUMBER: 'SET_LUCKY_NUMBER',
+	    	ADD_TODO: 'ADD_TODO',
+	    	REMOVE_TODO: 'REMOVE_TODO',
+	    	TOGGLE_COMPLETED_TODO: 'TOGGLE_COMPLETED_TODO'
 	    };
 
 	    const actions = {
