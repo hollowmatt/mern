@@ -23,7 +23,7 @@ const TodoItem = ({ done, label }) => (
 const list = [
 	{ id: 1, done: true, title: 'Study for exam' },
 	{ id: 2, done: false, title: 'Shower' },
-	{ id: 1, done: ralse, title: 'Go to gym' }
+	{ id: 3, done: false, title: 'Go to gym' }
 ];
 
 const mapToProps = ({ id: key, done, title: label }) => ({
@@ -41,6 +41,6 @@ const TodoListAPp = ({ items }) => (
 );
 
 ReactDOM.render(
-	<TodoListAPp items={list} />
+	<TodoListAPp items={list} />,
 	document.querySelector('[role="main"]')
 );
