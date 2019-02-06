@@ -16,7 +16,7 @@ class App extends React.Component {
 
 	onClick() {
 		this.setState(({ color }) => ({
-			color: (collor === 'blue') ? 'lime' : 'blue'
+			color: (color === 'blue') ? 'lime' : 'blue'
 		}));
 	}
 
