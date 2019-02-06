@@ -31,7 +31,7 @@ class App extends React.Component {
 	componentDidMount() {
 		this.intervalId = setInterval(() => {
 			this.setState(({ counter }) => ({
-				counter: counter + 1;
+				counter: counter + 1
 			}))
 		}, 1000);
 	}
