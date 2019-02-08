@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 const Header = () => ReactDOM.createPortal(
-	<h1>React Portals</h1>
+	<h1>React Portals</h1>,
 	document.querySelector('[id="heading"]')
 )
 
