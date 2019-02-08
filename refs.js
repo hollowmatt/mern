@@ -22,7 +22,7 @@ class LoginForm extends React.Component {
 	}
 
 	onClick(event) {
-		const form = this.refForm.curent;
+		const form = this.refForm.current;
 		form.dispatchEvent(new Event('submit'));
 	}
 
